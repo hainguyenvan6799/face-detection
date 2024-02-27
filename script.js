@@ -47,12 +47,12 @@ function createContainer() {
     return container;
 }
 
-function loadLabeledImages() {
+async function loadLabeledImages() {
     const labels = ['Black Window', 'Captain America', 'Captain Marvel', 'Hawkeye', 'Jim Rhodes', 'Thor', 'Tony Stark'];
     return Promise.all(labels.map(async label => {
         const descriptions = [];
         for (let i = 1; i <= 2; i++) {
-            const img = await faceapi.fetchImage(`public/labeled_images/${label}/${i}.jpg`);
+            const img = await faceapi.fetchImage(`https://raw.githubusercontent.com/hainguyenvan6799/face-detection/master/public/${label}/${i}.jpg`);
             const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptors();
             console.log({detections});
             descriptions.push(detections.descriptor);
